@@ -13,18 +13,17 @@ public class EntryPoint
     public static void main(String[] args) 
     {
 
-        Connection conn = ConnectionFactory.getConnection();
-
         try 
         {
-            Statement stmt = conn.createStatement();
-            //ResultSet rs = stmt.executeQuery(Client.create("Argos", "Bouchard", "arugos.bouchard@argosbouchard.pizza")); // Creating new client.
+            //Client.create("Argos", "Bouchard", "arugos.bouchard@argosbouchard.pizza");// Creating new client.
             Client.get(); //Getting all clients (overloaded method 1)
-            Client.get(1); //Getting all clients (overloaded method 2)
-            Client.get(2);
+            //Client.get(7); //Getting a specific client(overloaded method 2)
+            //Client.get(8);
             //System.out.println(Client.checkExistence(1)); //Checking if a client exists.
-            Client.update(1, "email", "argos.bouchard@abpizza.pizza"); //Updating with key value
-            Client.get(1);
+            //Client.update(1, "email", "argos.bouchard@abpizza.pizza"); //Updating with key value
+            //Client.get(7);
+            //Client.delete(1);
+            //Client.get(1);
         } 
         
         catch (SQLException e) 

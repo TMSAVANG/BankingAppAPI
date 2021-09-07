@@ -12,7 +12,7 @@ public class Client
 	
 	public static boolean checkExistence(int id) throws SQLException
 	{
-		String sql = "SELECT EXISTS(SELECT * FROM users WHERE id = " + id + ")";
+		String sql = "SELECT EXISTS(SELECT * FROM users WHERE id = " + id + ");";
 		ResultSet existRS = ConnectionFactory.returnQueryResults(sql);
 		
 		boolean exists = false;
@@ -26,7 +26,7 @@ public class Client
 
 	}
 	
-	public static String create(String firstName, String lastName, String email)
+	public static void create(String firstName, String lastName, String email) throws SQLException
 	{
 		String sql = "INSERT INTO users (first_name, last_name, email) VALUES \r\n"
 				+ "('"
@@ -37,12 +37,13 @@ public class Client
 				+ email
 				+ "');";
 		
-		return sql;
+		ResultSet createRS = ConnectionFactory.returnQueryResults(sql);
+		System.out.println(createRS.getInt(1));
 	}
 	
 	public static void get() throws SQLException
 	{
-		String sql = "SELECT * FROM users";
+		String sql = "SELECT * FROM users;";
 		ResultSet getRS = ConnectionFactory.returnQueryResults(sql);
 		
         while(getRS.next())
@@ -56,7 +57,7 @@ public class Client
 	{
 		if(checkExistence(id))
 		{
-			String sql = "SELECT * FROM users WHERE id = " + id;
+			String sql = "SELECT * FROM users WHERE id = " + id + ";";
 			ResultSet getRS = ConnectionFactory.returnQueryResults(sql);
 		
 			while(getRS.next())
@@ -77,6 +78,20 @@ public class Client
 		{
 			String sql = "UPDATE users SET " + key + " = '" + value + "' " + "WHERE id = " + id +";";
 			ResultSet updateRS = ConnectionFactory.returnQueryResults(sql);
+		}
+		
+		else
+		{
+			System.out.println("404");
+		}
+	}
+	
+	public static void delete(int id) throws SQLException
+	{
+		if(checkExistence(id))
+		{
+			String sql = "DELETE FROM users WHERE ID = " + id + ";";
+			ResultSet deleteRS = ConnectionFactory.returnQueryResults(sql);
 		}
 		
 		else
