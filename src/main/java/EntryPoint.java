@@ -6,6 +6,7 @@ import java.sql.Statement;
 import io.javalin.Javalin;
 import utils.ConnectionFactory;
 import models.Customer;
+import repositories.CustomerRepository;
 
 
 public class EntryPoint 
@@ -16,17 +17,12 @@ public class EntryPoint
 
         try 
         {
-            //Customer.create("Argos", "Bouchard", "arugos.bouchard@argosbouchard.pizza");// Creating new client.
-            Customer.get(); //Getting all clients (overloaded method 1)
-            Customer.get(7); //Getting a specific client(overloaded method 2)
-            //Customer.get(8);
-            //System.out.println(Client.checkExistence(1)); //Checking if a client exists.
-            //Customer.update(1, "email", "argos.bouchard@abpizza.pizza"); //Updating with key value
-            //Customer.get(7);
-            //Customer.delete(1);
-            //Customer.get(1);
-            Javalin app = Javalin.create().start(7001);
-            
+            //System.out.println(CustomerRepository.checkExistence(1));
+            //System.out.println(CustomerRepository.checkMax("customer_id"));
+            System.out.println(CustomerRepository.create("Cursed Deadman"));
+            System.out.println(CustomerRepository.get());
+            System.out.println(CustomerRepository.update(3, "name", "Edward Elric"));
+            System.out.println(CustomerRepository.delete(6));
         } 
         
         catch (SQLException e) 

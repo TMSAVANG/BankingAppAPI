@@ -1,107 +1,92 @@
 package models;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import utils.ConnectionFactory;
+import java.util.Objects;
 
 public class Customer
 {
 	
-	public static boolean checkExistence(int id) throws SQLException
+	public Customer()
 	{
-		String sql = "SELECT EXISTS(SELECT * FROM customers WHERE address_id = " + id + ");";
-		ResultSet existRS = ConnectionFactory.returnQueryResults(sql);
-		
-		boolean exists = false;
-		
-        while(existRS.next())
-        {
-        	exists = existRS.getBoolean(1);
-        }
-		
-        return exists;
-
+		super();
 	}
 	
-	public static void create(String firstName, String lastName, String email) throws SQLException
+	public Customer(int customer_id, String name, int address_id) 
 	{
-		String sql = "INSERT INTO customers (customer_id, name, address_id) VALUES \r\n"
-				+ "('"
-				+ firstName
-				+ "', '"
-				+ lastName 
-				+ "', '"
-				+ email
-				+ "');";
-		
-		ResultSet createRS = ConnectionFactory.returnQueryResults(sql);
-		System.out.println(createRS.getInt(1));
-	}
-	
-	public static void get() throws SQLException
-	{
-		String sql = "SELECT * FROM customers;";
-		ResultSet getRS = ConnectionFactory.returnQueryResults(sql);
-		
-        while(getRS.next())
-        {
-        	System.out.println("[Cusomer ID] | [Name] | [Address ID]");
-        	System.out.println(getRS.getString("customer_id") + " | " + getRS.getString("name") + " | " + getRS.getString("address_id"));
-        }
+		super();
+		this.customer_id = customer_id;
+		this.name = name;
+		this.address_id = address_id;
 	}
 
-	public static String get(int id) throws SQLException
+	
+	//customer_id
+	private int customer_id;
+
+	public int getCustomer_id() 
 	{
-		if(checkExistence(id))
-		{
-			String sql = "SELECT * FROM customers WHERE address_id = " + id + ";";
-			ResultSet getRS = ConnectionFactory.returnQueryResults(sql);
-		
-			while(getRS.next())
-			{
-				System.out.println(getRS.getString("customer_ID") + " | " + getRS.getString("name") + " | " + getRS.getString("address_ID"));
-			}
-			
-			return "200";
-		}
-		else
-		{
-			return "404";
-		}
+		return customer_id;
+	}
+
+	public void setCustomer_id(int customer_id) 
+	{
+		this.customer_id = customer_id;
+	}
+
+	@Override
+	public int hashCode() 
+	{
+		return Objects.hash(customer_id);
+	}
+
+	@Override
+	public boolean equals(Object obj) 
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Customer other = (Customer) obj;
+		return customer_id == other.customer_id;
+	}
+
+	@Override
+	public String toString() 
+	{
+		return "Customer [customer_id=" + customer_id + "]";
+	}
+	//end of customer_id
+	
+	
+	private String name;
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public void setName(String name) 
+	{
+		this.name = name;
 	}
 	
-	public static String update(int id, String key, String value) throws SQLException
-	{
 	
-		if(checkExistence(id))
-		{
-			String sql = "UPDATE customers SET " + key + " = '" + value + "' " + "WHERE address_id = " + id +";";
-			ResultSet updateRS = ConnectionFactory.returnQueryResults(sql);
-			return "200";
-		}
-		
-		else
-		{
-			return "404";
-		}
-	}
 	
-	public static String delete(int id) throws SQLException
+	
+	private int address_id;
+
+	public int getAddress_id() 
 	{
-		if(checkExistence(id))
-		{
-			String sql = "DELETE FROM customers WHERE address_id = " + id + ";";
-			ResultSet deleteRS = ConnectionFactory.returnQueryResults(sql);
-			return "200";
-		}
-		
-		else
-		{
-			return "404";
-		}
+		return address_id;
 	}
+
+	public void setAddress_id(int address_id) 
+	{
+		this.address_id = address_id;
+	}
+
+
+	
 	
 }
