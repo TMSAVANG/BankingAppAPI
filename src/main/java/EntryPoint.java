@@ -19,8 +19,9 @@ public class EntryPoint
         {
             //System.out.println(CustomerRepository.checkExistence(1));
             //System.out.println(CustomerRepository.checkMax("customer_id"));
-            System.out.println(CustomerRepository.create("Cursed Deadman"));
             System.out.println(CustomerRepository.get());
+            Customer grab = CustomerRepository.get(2);
+            System.out.println(CustomerRepository.create("Cursed Deadman"));
             System.out.println(CustomerRepository.update(3, "name", "Edward Elric"));
             System.out.println(CustomerRepository.delete(6));
         } 

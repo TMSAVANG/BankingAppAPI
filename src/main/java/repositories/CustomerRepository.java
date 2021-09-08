@@ -84,25 +84,28 @@ public class CustomerRepository
         return "200";
 	}
 
-	/*public static String get(int id) throws SQLException
+	public static Customer get(int id) throws SQLException
 	{
 		if(checkExistence(id))
 		{
 			String sql = "SELECT * FROM customers WHERE customer_id = " + id + ";";
 			ResultSet getRS = ConnectionFactory.returnQueryResults(sql);
-		
+			Customer temp = new Customer();
+			
 			while(getRS.next())
 			{
-				""
+				temp.setCustomer_id(getRS.getInt("customer_id"));
+				temp.setName(getRS.getString("name"));
+				temp.setAddress_id(getRS.getInt("address_id"));
 			}
 			
-			return "200";
+			return temp;
 		}
 		else
 		{
-			return "404";
+			return null;
 		}
-	}*/
+	}
 	
 	public static String update(int id, String key, String value) throws SQLException
 	{
